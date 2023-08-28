@@ -8,7 +8,7 @@
 		private static $user = null;
 		
 		private function __construct() {
-			$this->db = new mysqli("sql306.hostingem.ru", "gnioo_32733497", "545426", "gnioo_32733497_itecomd_crmtest"); 
+			$this->db = new mysqli("localhost", "root", "", "itecomd_crmtest"); 
 			$this->db->query("SET NAMES 'utf8'");
 		}
 		

@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stamp</title>
+    <style>
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+main {
+  display: flex;
+  align-content: stretch;
+  align-items: stretch;
+  height: 100%;
+  max-width: 100%;
+  font-family: calibri;
+  margin: 0;
+}
+.lightbox {
+  flex: 1 1 0px;
+  position: relative;
+  background: #333;
+  max-width: calc(100% - 250px);
+}
+canvas {
+  border: 1px dashed gray;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  max-height: 100%;
+  max-width: 100%;
+}
+form {
+  width: 250px;
+  padding: 20px;
+  flex-grow: 0;
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: stretch;
+}
+form > * {
+  margin-bottom: 10px;
+}
+form .toggle {
+  display: flex;
+}
+form .toggle label {
+  flex: 1;
+  text-align: center;
+}
+form .toggle label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+form .toggle label:last-of-type {
+  border-radius: 0 4px 4px 0;
+}
+form input[type=text] {
+  padding: 4px;
+}
+form input[type=radio] {
+  display: none;
+}
+form input[type=radio] + label {
+  border: 1px solid black;
+  background: transparent;
+  transition: background .2s linear, color .2s linear;
+  margin: 0;
+  color: black;
+}
+form input[type=radio]:checked + label {
+  background: #333;
+  color: white;
+}
+.download-button {
+  display: block;
+  text-decoration: none;
+  border: 1px solid #888;
+  background: #444;
+  color: white;
+  padding: 8px;
+  text-align: center;
+}
+
+    </style>
+  </head>
+  <body>
+
+    <main>
+
+      <section class="lightbox">
+        <canvas class="display"></canvas>
+      </section>
+
+      <form autocomplete="off">
+
+        <input type="file">
+
+        <input style="display: none;" type="text" placeholder="Largest dimension" class="limit" value="1600">
+
+        <nav style="display: none;" class="toggle">
+          <input type="radio" name="type" id="logo" value="logo" checked>
+
+          <input type="radio" name="type" id="text" value="text">
+        </nav>
+
+          <input style="display: none;" type="radio" name="contrast" id="light" value="light" checked>
+        
+        </nav>
+
+        <a download="image.jpg" class="download-button" href="">Скачать</a>
+      </form>
+
+    </main>
+
+    <script>
+(function() {
+
+  //dom patching
+  var queryAll = function(selector) {
+    return Array.prototype.slice.call(document.querySelectorAll(selector));
+  };
+  var query = document.querySelector.bind(document);
+
+  //globals
+  var download = query(".download-button");
+  var canvas = query("canvas");
+  var context = canvas.getContext("2d");
+  context.imageSmoothingEnabled = true;
+  var config = window.config = {
+    markLocation: { x: 700, y: 1350 }
+  };
+  var light = new Image();
+  light.src = "./src/logo-dark.png";
+  var sourceImage;
+
+  //updates
+  var updateConfig = function() {
+    config.limit = query(".limit").value;
+    config.contrast = query("[name=contrast]:checked").value;
+    config.type = query("[name=type]:checked").value;
+    config.text = query(".manual").value;
+    config.fontSize = query(".font-size").value * 1;
+  };
+
+  var render = function() {
+    if (!sourceImage) return;
+    if (sourceImage.width > sourceImage.height) {
+      canvas.width = config.limit;
+      var height = sourceImage.height / sourceImage.width;
+      canvas.height = config.limit * height;
+    } else {
+      canvas.height = config.limit;
+      var width = sourceImage.width / sourceImage.height;
+      canvas.width = config.limit * width;
+    }
+    context.drawImage(sourceImage, 0, 0, canvas.width, canvas.height);
+    if (config.type == "logo") {
+      //add ST logo
+      var watermark = config.contrast == "light" ? light : dark;
+      context.drawImage(watermark, config.markLocation.x, config.markLocation.y);
+    } else {
+      var metrics = context.measureText(config.text);
+      var x = config.textLocation[1] == "left" ? 10 : canvas.width - 10;
+      var y = config.textLocation[0] == "top" ? 10 : canvas.height - 10;
+      context.fillStyle = config.contrast == "light" ? "#DDD" : "#222";
+      context.textBaseline = config.textLocation[0];
+      context.textAlign = config.textLocation[1];
+      context.font = config.fontSize + "px ff-meta-serif-web-pro";
+      context.fillText(config.text, x, y);
+    }
+    var data = canvas.toDataURL("image/jpeg");
+    download.setAttribute("href", data);
+  };
+
+  //listeners
+  var cancel = function(e) { e.preventDefault() };
+
+  var onDrop = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    var file = e.dataTransfer.files[0];
+    //handle image links (maybe, probably not due to CORS)
+    if (!file) {
+      var url = e.dataTransfer.getData("text/uri-list") || e.dataTransfer.getData("text/plain");
+      sourceImage = new Image();
+      sourceImage.onload = render;
+      sourceImage.src = url;
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function() {
+      sourceImage = new Image();
+      sourceImage.onload = render;
+      sourceImage.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  document.querySelector("input[type=file]").addEventListener("change", function(e) {
+    var input = e.target;
+    var file = input.files[0];
+    var reader = new FileReader();
+    reader.onload = function() {
+      sourceImage = new Image();
+      sourceImage.onload = render;
+      sourceImage.src = reader.result;
+    }
+    reader.readAsDataURL(file);
+  });
+
+  document.body.addEventListener("dragover", cancel);
+  document.body.addEventListener("drop", onDrop);
+
+  var onClickCanvas = function(e) {
+    if (e.target !== canvas) return;
+    var canvasCoords = canvas.getBoundingClientRect();
+    var adjusted = {
+      x: e.pageX - canvasCoords.left,
+      y: e.pageY - canvasCoords.top
+    };
+    config.textLocation = [];
+
+    render();
+  };
+
+  document.body.addEventListener("click", onClickCanvas);
+
+  var onChange = function() {
+    updateConfig();
+    render();
+  };
+
+  document.body.addEventListener("change", onChange);
+  document.body.addEventListener("keyup", onChange);
+
+  //kickoff
+  updateConfig();
+
+  //load and launch typekit
+  var typeConfig = {
+    kitId: 'rvq5yyp',
+    scriptTimeout: 3000,
+    active: () => window.render ? render() : null
+  },
+  d = document,
+  h = d.documentElement, t = setTimeout(function() {
+    h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+  }, typeConfig.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a;
+  h.className += " wf-loading";
+  tk.src = '//use.typekit.net/' + typeConfig.kitId + '.js';
+  tk.async = true;
+  tk.onload = tk.onreadystatechange = function() {
+    a = this.readyState;
+    if (f || a && a != "complete" && a != "loaded") return;
+    f = true;
+    clearTimeout(t);
+    try {
+      Typekit.load(typeConfig)
+    } catch (e) {}
+  };
+  s.parentNode.insertBefore(tk, s);
+
+})();
+    </script>
+  </body>
+</html>

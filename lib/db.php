@@ -694,12 +694,12 @@
 			return $result_set;
         }
 
-		/*
+		
 		public function AJAXSearchBlacklist($search) {
 			$result_set = $this->db->query("SELECT * FROM `blacklist` WHERE `name` LIKE '%$search%' ORDER by date DESC");
 			return $result_set;
         }
-*/
+
 
 			
         public function searchClients($idManager, $search) {

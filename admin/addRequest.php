@@ -36,6 +36,32 @@
             };
             ajax.send();
         }
+        function autocompleteTag2(){
+                var ajax = new XMLHttpRequest();
+                ajax.open("GET", "../lib/autocompleteBlackList.php", true);
+                ajax.onload = function () {
+                    var list = JSON.parse(ajax.responseText);
+                    var inputElement = document.querySelector("#tag1");
+                    var awesompleteInstance = new Awesomplete(inputElement, {minChars: 1, list: list});
+
+                    // Adaugă clasa CSS specifică pentru stilul cu cifra 2
+                    awesompleteInstance.container.classList.add("awesomplete2");
+                };
+                ajax.send();
+            }
+            function autocompleteTag3(){
+                var ajax = new XMLHttpRequest();
+                ajax.open("GET", "../lib/autocompleteBlackList.php", true);
+                ajax.onload = function () {
+                    var list = JSON.parse(ajax.responseText);
+                    var inputElement = document.querySelector("#tag");
+                    var awesompleteInstance = new Awesomplete(inputElement, {minChars: 1, list: list});
+
+                    // Adaugă clasa CSS specifică pentru stilul cu cifra 2
+                    awesompleteInstance.container.classList.add("awesomplete2");
+                };
+                ajax.send();
+            }
         function autocompletefromInput(){
             var awesomplete = new Awesomplete(document.querySelector("#fromInput"), {minChars: 3,autoFirst: true});
             $("#fromInput").on("keyup", function(){
@@ -92,6 +118,8 @@
 		$(function(){
             autocompleteTag();
             autocompleteTag1();
+            autocompleteTag2();
+            autocompleteTag3();
             autocompletefromInput();
             autocompleteToInput();
             var postDate = $('#dateInput').val();

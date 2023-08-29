@@ -93,13 +93,29 @@
             background: #689f92;
             color:#fff;
 		}
-		
+
+
 		.awesomplete li:hover mark {
-            background: #689f92
+            background: #689f92;
             color:#fff;
 		}
 		
 		.awesomplete li[aria-selected="true"] mark {
 			background: #689f92;
+			color:#fff;
+		}
+
+		.awesomplete2 mark {
+            background:#ff2727;
+            color:#fff;
+		}
+		
+		.awesomplete2 li:hover mark {
+            background: #ff2727;
+            color:#fff;
+		}
+		
+		.awesomplete2 li[aria-selected="true"] mark {
+			background: #ff2727;
 			color:#fff;
 		}

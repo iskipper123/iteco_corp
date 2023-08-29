@@ -1,6 +1,90 @@
 <?php require_once '../dashbord/dashbord.php';?> 
 <h1 style="    float: left;    margin-bottom: 25px;">Черный список</h1><br><br><br><br>
-<a href="addToBlacklist.php"><button class="btn btn-primary"> Добавить в черный список</button></a>
+<button class="btn btn-primary"> Добавить в черный список</button>
+<style>
+.popup {
+    display: none;
+    position: fixed;
+    width: auto;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px 30px 30px 30px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.popup button2 {
+    flex: 1;
+    padding: 10px;
+    background-color: #4DA598;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.popup button2.close {
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 2px 6px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.popup button2:hover {
+    background-color: #2A5A54;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+    $(".btn-primary").click(function() {
+        var popup = $("<div>").addClass("popup");
+        var popupButtons = $("<div>").addClass("popup-buttons");
+        
+        var btnClose = $("<button2>").addClass("close").text("X");
+        btnClose.click(function() {
+            popup.fadeOut(300, function() {
+                $(this).remove();
+            });
+        });
+        
+        var btnZakazchiki = $("<button2>").text("Заказчики");
+        btnZakazchiki.click(function() {
+            window.location.href = "addToBlacklistZacazciki.php";
+        });
+        
+        var btnPerevozchiki = $("<button2>").text("Перевозчики");
+        btnPerevozchiki.click(function() {
+            window.location.href = "addToBlacklistPerevozciki.php";
+        });
+        
+        popupButtons.append(btnZakazchiki, btnPerevozchiki);
+        popup.append(btnClose, popupButtons);
+        
+        $("body").append(popup);
+        popup.fadeIn(300);
+    });
+});
+</script>
+
+
+
 <?php
 require_once '../dashbord/dashbord.php';
 

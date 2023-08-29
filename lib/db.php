@@ -693,13 +693,13 @@
 			$result_set = $this->db->query("SELECT * FROM `requests` WHERE `from` LIKE '%$search%' ORDER by date DESC");
 			return $result_set;
         }
-		public function AJAXSearchBlacklist($search, $contractorsType) {
-			// global $arrayOfContractorsTypes;
-			// $contractorsType = $arrayOfContractorsTypes[0];
-			$result_set = $this->db->query("SELECT DISTINCT name FROM `blacklist` WHERE `name` LIKE '%$search%' ORDER by name");
+
+		/*
+		public function AJAXSearchBlacklist($search) {
+			$result_set = $this->db->query("SELECT * FROM `blacklist` WHERE `name` LIKE '%$search%' ORDER by date DESC");
 			return $result_set;
         }
-		
+*/
 
 			
         public function searchClients($idManager, $search) {

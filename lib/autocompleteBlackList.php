@@ -1,15 +1,18 @@
 <?php
-	$searchq=$_GET['q'];
-	
-	require_once "../lib/db.php";
-	require_once "../lib/vars.php";
-	
-	$db = DB::getObject();
-	
-	$result_set = $db->AJAXSearchBlacklist($searchq, $arrayOfContractorsTypes[1]);
-    $result = [];
-	while (($row = $result_set->fetch_assoc()) != false) {
-        $result[]=$row['name'];
+    $searchq = $_GET['q'];
+
+    // Подключение к базе данных
+    require_once "../lib/db.php";
+    $db = DB::getObject();
+
+    // Запрос к базе данных для поиска городов
+    $query = "SELECT name FROM blacklist WHERE name LIKE '%$searchq%'";
+    $result_set = $db->query($query);
+
+    $result = array();
+    while ($row = $result_set->fetch_assoc()) {
+        $result[] = $row['name'];
     }
-    echo json_encode($result); 
+
+    echo json_encode($result);
 ?>

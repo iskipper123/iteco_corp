@@ -194,16 +194,13 @@
             <input class="btn btn-danger btn-sm" type="submit" name="cancel" value="Отменить">
         </form> 
     </div>
-	
-	
-
     <script defer>
         function autocompleteTag(){
             var ajax = new XMLHttpRequest(); 
             ajax.open("GET", "../lib/autocomplete.php", true);
             ajax.onload = function () {
                 var list = JSON.parse(ajax.responseText);
-                new Awesomplete(document.querySelector("#tag1"), {minChars: 1, list: list});
+                new Awesomplete(document.querySelector("#tag"), {minChars: 1, list: list});
             };
             ajax.send();
         }
@@ -216,24 +213,9 @@
             };
             ajax.send();
         }
-		function autocompleteTag2(){
-			var ajax = new XMLHttpRequest();
-			ajax.open("GET", "../lib/autocompleteBlackList.php", true);
-			ajax.onload = function () {
-				var list = JSON.parse(ajax.responseText);
-				var inputElement = document.querySelector("#tag1");
-				var awesompleteInstance = new Awesomplete(inputElement, {minChars: 1, list: list});
-
-				// Adaugă clasa CSS specifică pentru stilul cu cifra 2
-				awesompleteInstance.container.classList.add("awesomplete2");
-			};
-			ajax.send();
-		}
-
 		$(function(){
             autocompleteTag();
             autocompleteTag1();
-            autocompleteTag2();
             var postDate = $('#dateInput').val();
             var datepicker = $('#dateInput').datepicker().data('datepicker');
             if(postDate!=''){

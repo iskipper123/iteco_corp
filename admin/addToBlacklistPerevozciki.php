@@ -37,7 +37,7 @@
 		if(!$error) {
 			$name = htmlspecialchars($name, ENT_QUOTES);
 			
-			$db->addToBlacklist($name, $contactName, $status);
+			$db->addToBlacklist1($name, $contactName, $status);
 							
 			header("Location: blacklist.php?success");
 			exit;

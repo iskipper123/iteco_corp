@@ -38,7 +38,7 @@
         }
         function autocompleteTag2(){
                 var ajax = new XMLHttpRequest();
-                ajax.open("GET", "../lib/autocompleteBlackList.php", true);
+                ajax.open("GET", "../lib/autocompleteBlackList1.php", true);
                 ajax.onload = function () {
                     var list = JSON.parse(ajax.responseText);
                     var inputElement = document.querySelector("#tag1");
@@ -51,7 +51,7 @@
             }
             function autocompleteTag3(){
                 var ajax = new XMLHttpRequest();
-                ajax.open("GET", "../lib/autocompleteBlackList1.php", true);
+                ajax.open("GET", "../lib/autocompleteBlackList.php", true);
                 ajax.onload = function () {
                     var list = JSON.parse(ajax.responseText);
                     var inputElement = document.querySelector("#tag");

@@ -240,7 +240,10 @@
 			$timeNow = time();
 			$this->db->query("INSERT INTO `blacklist` (`name`, `contactName`, `date`,`status` ) VALUES ('$name', '$contactName', '$timeNow', '$status')");
 		}
-		
+		public function addToBlacklist1($name, $contactName, $status) {
+			$timeNow = time();
+			$this->db->query("INSERT INTO `blacklist1` (`name`, `contactName`, `date`,`status` ) VALUES ('$name', '$contactName', '$timeNow', '$status')");
+		}
 		
 		public function addDoc($id, $name, $category, $path) {
 			$timeNow = time();

@@ -89,7 +89,10 @@ $(document).ready(function() {
 require_once '../dashbord/dashbord.php';
 
 $db = DB::getObject();
-$result_set = $db->getAllOrder("blacklist", "date DESC");
+$result_set_blacklist = $db->getAllOrder("blacklist", "date DESC");
+$result_set_blacklist1 = $db->getAllOrder("blacklist1", "date DESC");
+
+$combined_result = array_merge($result_set_blacklist->fetch_all(MYSQLI_ASSOC), $result_set_blacklist1->fetch_all(MYSQLI_ASSOC));
 
 $addConfirmButton = false;
 $error_delete = '';
@@ -97,49 +100,55 @@ $error_delete = '';
 if(isset($_POST["editMarkedItem"])) {
     $idItem = $_POST["idItem"];
 
-    if(!isset($idItem))
+    if(!isset($idItem)) {
         $error_delete = "Не была выбрана ни одна заявка";
-    else {
-        header("Location: editBlacklist.php?edit=$idItem");
+    } else {
+        header("Location: editBlacklist.php?edit=" . $idItem);
         exit;
     }
 }
 
 if(isset($_POST["deleteMarkedItems"])) {
     $idItem = $_POST["idItem"];
-    if(!isset($idItem))
+    if(!isset($idItem)) {
         $error_delete = "Не была выбрана ни одна заявка";
-    else
+    } else {
         $addConfirmButton = true;
+    }
 }
 
 if(isset($_POST["comfirmDelete"])) {
     $idItem = $_POST["idItem"];
 
     $db->delete("blacklist", $idItem);
+    $db->delete("blacklist1", $idItem);
 
-
-    // Redirecționează către "blacklist.php"
+    // Sort the combined results by date
+    usort($combined_result, function($a, $b) {
+        return $b['date'] - $a['date'];
+    });
+    
+    // Redirect to "blacklist.php"
     header("Location: blacklist.php?success");
     exit;
 }
+
+if(isset($_GET["success"])) {
+    echo '<div class="col-md-4">';
+    echo '<div class="alert alert-success" role="alert">';
+    echo 'Данные успешно сохранены!';
+    echo '</div>';
+    echo '</div>';
+    
+    // Redirect after 3 seconds
+    echo '<script>';
+    echo 'setTimeout(function() {';
+    echo 'window.location.href = "blacklist.php";';
+    echo '}, 1000);'; // 3000 milliseconds = 3 seconds
+    echo '</script>';
+}
 ?>
-
-<?php if(isset($_GET["success"])) { ?>
-    <!-- Afisează mesajul de succes -->
-    <div class="col-md-4">
-        <div class="alert alert-success" role="alert">
-            Данные успешно сохранены!
-        </div>
-    </div>
-
-    <!-- Adaugă un script pentru redirecționare după 3 secunde -->
-    <script>
-        setTimeout(function() {
-            window.location.href = "blacklist.php";
-        }, 1000); // 3000 milisecunde = 3 secunde
-    </script>
-<?php } ?>
+<!-- Restul codului HTML rămâne neschimbat -->
     <div class="col-md-12">
         <? if($addConfirmButton) {?>
             <form name="" action="" method="post">
@@ -179,14 +188,16 @@ if(isset($_POST["comfirmDelete"])) {
                     <th>Дата</th>
                     <th></th>
                 </tr>
-                <? while (($row = $result_set->fetch_assoc()) != false) { ?>
-                    <tr>
+                <?php usort($combined_result, function($a, $b) {
+    return $b['date'] - $a['date'];
+});?>
+                <?php foreach ($combined_result as $row) { ?>
+                        <tr>
                         <td><input type="radio" name="idItem" value="<?=$row[id] ?>"></td>
                         <td><?=$row[name]?></td>
                         <td><?=$row[contactName]?></td>
                         <td><?=$row[status]?></td>
-                        <td><?=date("d.m.Y", $row["date"])?></td>
-                        <td> <ul class="right_menu">
+                        <td><?php echo date("d.m.Y", $row["date"]); ?></td>                        <td> <ul class="right_menu">
               <li class="add_menu">
               <img src="/images/items.png" alt="">
                 <ul>
@@ -216,6 +227,7 @@ if(isset($_POST["comfirmDelete"])) {
             $(this).children('ul').toggleClass('active');
         });
 </script>
+
 <?  require_once '../partsOfPages/footer.php';?>
 
 </div>

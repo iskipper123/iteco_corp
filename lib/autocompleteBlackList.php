@@ -7,7 +7,7 @@
 	
 	$db = DB::getObject();
 	
-	$result_set = $db->AJAXSearchBlacklist($searchq, $arrayOfContractorsTypes[1]);
+	$result_set = $db->AJAXSearchBlacklist($searchq, $arrayOfContractorsTypes[3]);
     $result = [];
 	while (($row = $result_set->fetch_assoc()) != false) {
 		$result[]=$row['name'];

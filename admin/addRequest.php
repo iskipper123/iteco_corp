@@ -42,7 +42,7 @@
                 ajax.onload = function () {
                     var list = JSON.parse(ajax.responseText);
                     var inputElement = document.querySelector("#tag1");
-                    var awesompleteInstance = new Awesomplete(inputElement, {minChars: 3, list: list});
+                    var awesompleteInstance = new Awesomplete(inputElement, {minChars: 2, list: list});
 
                     // Adaugă clasa CSS specifică pentru stilul cu cifra 2
                     awesompleteInstance.container.classList.add("awesomplete2");
@@ -55,7 +55,7 @@
                 ajax.onload = function () {
                     var list = JSON.parse(ajax.responseText);
                     var inputElement = document.querySelector("#tag");
-                    var awesompleteInstance = new Awesomplete(inputElement, {minChars: 3, list: list});
+                    var awesompleteInstance = new Awesomplete(inputElement, {minChars: 2, list: list});
 
                     // Adaugă clasa CSS specifică pentru stilul cu cifra 2
                     awesompleteInstance.container.classList.add("awesomplete2");

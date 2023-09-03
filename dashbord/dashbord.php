@@ -215,17 +215,95 @@ function check_client(){
               <? //} ?>
 </li>
 <? //if($_SESSION["role"] == 1) {?> 
-      <li><a href="/get_urle9804678248fda5be215f404bc.php?manager_id=<?php echo $_SESSION["id"] ?>" target="_blank">Запрос данных<img src="/images/plus.png" alt=""></a></li> 
+  <button class="add-request-btn1"><a style="color: #fff;" href="/get_urle9804678248fda5be215f404bc.php?manager_id=<?php echo $_SESSION["id"] ?>" target="_blank">Запрос данных<img src="/images/plus.png" style="padding-left: 10px;" alt=""></a></button>  
     <?php //} ?>
-      <li><a class="addrequest" data-toggle="modal" data-target="#client_modal"  data-backdrop="static" data-keyboard="false" data-client_id="addRequest.php">Сделка<img src="/images/plus.png" alt=""></a></li> 
-      <li class="company_add"><a class="addrequest" data-toggle="modal" data-target="#client_modal"  data-backdrop="static" data-keyboard="false" data-client_id="addCustomer.php">Компания<img src="/images/plus.png" alt=""></a>
-      </li>
+   
+    <button class="add-request-btn"> Сделка<img src="/images/plus.png" style="padding-left: 10px;" alt=""></button>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <iframe id="form-iframe" src="addRequest.php" style="width: 800px; height: 700px;"></iframe>
+        </div>
+    </div>    
+    <button class="add-request-btn1"><a class="addrequest" style="color: #fff;" data-toggle="modal" data-target="#client_modal"  data-backdrop="static" data-keyboard="false" data-client_id="addCustomer.php">Компания<img src="/images/plus.png" style="padding-left: 10px;" alt=""></a>
+</button>  
+      
     </ul>
             <?php require_once "../partsOfPages/welcome.php"; ?>
             </div>
         </nav>
+        <style>
+.add-request-btn {
+  background-color: #4DA598;
+  color: #fff;
+  border: none;
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 10%;
+}
+
+.add-request-btn1 {
+  background-color: #4DA598;
+  color: #fff;
+  border: none;
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 10%;
+}
+.add-request-btn:hover {
+  background-color: #4DA598;
+  color: #fff;
+  border: none;
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 10%;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+</style>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const addRequestBtn = document.querySelector(".add-request-btn");
+    const popup = document.getElementById("popup");
+    const closePopup = document.querySelector(".close-popup");
+
+    addRequestBtn.addEventListener("click", function () {
+        popup.style.display = "block";
+    });
+
+    closePopup.addEventListener("click", function () {
+        popup.style.display = "none";
+    });
+});
+
 $(document).ready(function(){
     if (!$.cookie('closed')) {
        $.cookie('closed', 'yes', {expires: 7 });
@@ -261,8 +339,6 @@ $(document).ready(function(){
 tippy('[data-tippy-content]', {
   placement: 'right',
 });
-
-
 
 </script>
 

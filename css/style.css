@@ -442,8 +442,8 @@ cursor:pointer;
 .static-top{border-bottom: 2px solid #6e6e6f;}
 .his{max-height: 715px; overflow-y: scroll;overflow-x: hidden;} 
 .form-group label{   display: block;}
-#weightInput, #weight_var,#nameInput, #company_form, #nameCheck{width:50%; display: inline-block;float:left;border: 1px solid #cecece;}
-#vInput, #v_var{width:50%; display: inline-block;float:left;}
+#weightInput, #weight_var, #nameInput, #company_form, #nameCheck{width:50%; display: inline-block;float:left;}
+#vInput, #vInput_var{width:50%; display: inline-block;float:left;}
 #capacityInput, #capacity_var{width:50%; display: inline-block;float:left;} 
 
 #info .col-md-12 .col-md-1, #info .col-md-12 .col-md-2, #info .col-md-12 .col-md-3, #info .col-md-12 .col-md-4, #info .col-md-12 .col-md-5, #info .col-md-12 .col-md-6{float: left;    padding-right: 10px;padding-top: 15px;}

@@ -22,219 +22,168 @@
 			<input class="form-control" type="hidden" name="id" id="id" autocomplete="off" value="<?=isset($_POST["id"])? $_POST["id"]:$row["id"]?>">
 		<?php } ?>
 			<input class="form-control<?=isset($error_date)&&$error_date!=''?' is-invalid':''?> datepicker-here" data-auto-close="true" type="text" name="date" id="dateInput" placeholder="дд.мм.гггг" autocomplete="off" value="<?=isset($_POST["date"])? $_POST["date"]:$date?>">
-			<div class="invalid-feedback" <?=isset($error_date)&&$error_date!=''?'style="display:block;"':''?>><?=$error_date ?></div>
 		</div>
 		<div class="form-group col-md-4 mr-4">
-			<label for="dateInput" class="required">Дата погрузки</label>
-			<input class="form-control<?=isset($error_dateShipping)&&$error_dateShipping!=''?' is-invalid':''?> datepicker-here" data-auto-close="true" type="text" name="dateShipping" id="dateInput" placeholder="дд.мм.гггг" autocomplete="off" value="<?=isset($_POST["dateShipping"])? $_POST["dateShipping"]:$dateShipping?>">
-			<div class="invalid-feedback" <?=isset($error_dateShipping)&&$error_dateShipping!=''?'style="display:block;"':''?>><?=$error_dateShipping?></div>
-		</div>
+			<label for="dateInput2" class="required">Дата погрузки</label>
+			<input class="form-control<?=isset($error_dateShipping)&&$error_dateShipping!=''?' is-invalid':''?> datepicker-here" data-auto-close="true" type="text" name="dateShipping" id="dateInput2" placeholder="дд.мм.гггг" autocomplete="off" value="<?=isset($_POST["dateShipping"])? $_POST["dateShipping"]:$dateShipping?>">
+    	</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="timeInput" class="required">Время погрузки</label>
 			<input class="form-control<?=isset($error_time)&&$error_time!=''?' is-invalid':''?>" type="text" name="time" id="timeInput" autocomplete="off" value="<?=isset($_POST["time"])? $_POST["time"]:$row["time"]?>">
-			<div class="invalid-feedback" <?=isset($error_time)&&$error_time!=''?'style="display:block;"':''?>><?=$error_time ?></div>
-		</div>
+    	</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="termInput" class="required">Срок доставки</label>
 			<input class="form-control<?=isset($error_term)&&$error_term!=''?' is-invalid':''?>" type="text" name="term" id="termInput" autocomplete="off" value="<?=isset($_POST["term"])? $_POST["term"]:$row["term"]?>">
-			<div class="invalid-feedback" <?=isset($error_term)&&$error_term!=''?'style="display:block;"':''?>><?=$error_term ?></div>
 		</div>	
 		<div class="form-group col-md-4 mr-4">
 			<label for="tag" class="required">Выберите заказчика</label>
 			<input class="form-control<?=isset($error_customer)&&$error_customer!=''?' is-invalid':''?>" type="text" name="customer" id="tag" autocomplete="off" value="<?=isset($_POST["customer"])? $_POST["customer"]:$customer?>">
-			<div class="invalid-feedback" <?=isset($error_customer)&&$error_customer!=''?'style="display:block;"':''?>><?=$error_customer ?></div>
-		</div>
+            <div class="invalid-feedback2"></div>
+        </div>
 		<div class="form-group col-md-4 mr-4">
-			<label for="tag1" class="required">Выберите перевозчика</label>
-			<input class="form-control<?=isset($error_carrier)&&$error_carrier!=''?' is-invalid':''?>" type="text" name="carrier" id="tag1" autocomplete="off" value="<?=isset($_POST["carrier"])? $_POST["carrier"]:$carrier?>">
-			<div class="invalid-feedback" <?=isset($error_carrier)&&$error_carrier!=''?'style="display:block;"':''?>><?=$error_carrier ?></div>
-		</div>
+            <label for="tag1" class="required">Выберите перевозчика</label>
+            <input class="form-control<?= isset($error_carrier) && $error_carrier != '' ? ' is-invalid' : '' ?>" type="text" name="carrier" id="tag1" autocomplete="off" value="<?= isset($_POST["carrier"]) ? $_POST["carrier"] : $carrier ?>">
+            <div class="invalid-feedback3"></div>
+        </div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="carNumberInput" class="required">Номер автомобиля</label>
 			<input class="form-control<?=isset($error_carNumber)&&$error_carNumber!=''?' is-invalid':''?>" type="text" name="carNumber" id="carNumberInput" autocomplete="off" value="<?=isset($_POST["carNumber"])? $_POST["carNumber"]:$row[carNumber]?>">
-			<div class="invalid-feedback" <?=isset($error_carNumber)&&$error_carNumber!=''?'style="display:block;"':''?>><?=$error_carNumber ?></div>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="fioInput" class="required">Водитель ФИО</label>
 			<input class="form-control<?=isset($error_fio)&&$error_fio!=''?' is-invalid':''?>" type="text" name="fio" id="fioInput" autocomplete="off" value="<?=isset($_POST["fio"])? $_POST["fio"]:$row[fio]?>">
-			<div class="invalid-feedback" <?=isset($error_fio)&&$error_fio!=''?'style="display:block;"':''?>><?=$error_fio ?></div>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="driverPhonesInput" class="required">Контактные телефоны водителя</label>
-			<textarea class="form-control<?=isset($error_driverPhones)&&$error_driverPhones!=''?' is-invalid':''?>" name="driverPhones" id="driverPhonesInput" ><?=isset($_POST["driverPhones"])? $_POST["driverPhones"]:$row[driverPhones]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_driverPhones)&&$error_driverPhones!=''?'style="display:block;"':''?>><?=$error_driverPhones ?></div>
+			<textarea class="form-control" name="driverPhones" id="driverPhonesInput" ></textarea>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="weightInput" class="required">Вес</label>
-			<input class="form-control<?=isset($error_weight)&&$error_weight!=''?' is-invalid':''?>" type="text" name="weight" id="weightInput" autocomplete="off" value="<?=isset($_POST["weight"])? $_POST["weight"]:$row[weight]?>">
- 			<select class="form-control<?=isset($error_weight)&&$error_weight!=''?' is-invalid':''?>" name="weight_var" id="weight_var">
-                        <? if($row[weight_var] == "") { ?>
-                            <option selected="selected"></option>
-                        <?}
-                        else { ?>
-                            <option selected="selected"> <?=$row[weight_var] ?> </option>
-                        <?}?>
-                        <? for($i = 0; $i < count($arrayOfweight); $i++) {
-                            if($row[weight_var] != $arrayOfweight[$i]) { ?>
-                                <option><?=$arrayOfweight[$i] ?></option>
-                            <?}?>
-                        <?}?>
-                    </select>
-			<div class="invalid-feedback" <?=isset($error_weight)&&$error_weight!=''?'style="display:block;"':''?>><?=$error_weight ?></div>
+			<input class="form-control" type="text" name="weightInput" id="weightInput" autocomplete="off" value="">
+            <select class="form-control" name="weight_var" id="weight_var">
+                <option selected="selected" value="">Selectează măsura</option>
+                <? for($i = 0; $i < count($arrayOfweight); $i++) {
+                    ?>
+						<option><?=$arrayOfweight[$i] ?></option>
+					<?}?>
+            </select>
 		</div>
+        
 		<div class="form-group col-md-4 mr-4">
 			<label for="vInput" class="required">Объем</label>
-			<input class="form-control<?=isset($error_v)&&$error_v!=''?' is-invalid':''?>" type="text" name="v" id="vInput" autocomplete="off" value="<?=isset($_POST["v"])? $_POST["v"]:$row[v]?>">
-                   <select class="form-control<?=isset($error_v)&&$error_v!=''?' is-invalid':''?>" name="v_var" id="v_var">
-                        <? if($row[v_var] == "") { ?>
-                            <option selected="selected"></option>
-                        <?}
-                        else { ?>
-                            <option selected="selected"> <?=$row[v_var] ?> </option>
-                        <?}?>
-                        <? for($i = 0; $i < count($arrayOfv); $i++) {
-                            if($row[v_var] != $arrayOfv[$i]) { ?>
-                                <option><?=$arrayOfv[$i] ?></option>
-                            <?}?>
-                        <?}?>
-                    </select>
-			<div class="invalid-feedback" <?=isset($error_v)&&$error_v!=''?'style="display:block;"':''?>><?=$error_v ?></div>
+			<input class="form-control" type="text" name="vInput" id="vInput" autocomplete="off" value="">
+            <select class="form-control" name="vInput_var" id="vInput_var">
+                <option selected="selected" value="">Selectează măsura</option>
+                <? for($i = 0; $i < count($arrayOfv); $i++) {
+                    ?>
+						<option><?=$arrayOfv[$i] ?></option>
+					<?}?>
+            </select>
 		</div>
 
 		<div class="form-group col-md-4 mr-4">
 			<label for="categoryInput" class="required">Тип транспорта</label>
-			<select class="form-control<?=isset($error_transportType)&&$error_transportType!=''?' is-invalid':''?>" name="transportType" id="categoryInput">
-				<option selected="selected"></option>
+			<select class="form-control" name="categoryInput" id="categoryInput">
+				<option selected="selected" value="">Selecteaza transportul</option>
 				<? for($i = 0; $i < count($arrayOfTransportType); $i++) {
-					if($transportType == $arrayOfTransportType[$i]) { ?>
-						<option selected="selected"><?=$arrayOfTransportType[$i] ?></option>
-					<?}
-					else {?>
+                    ?>
 						<option><?=$arrayOfTransportType[$i] ?></option>
 					<?}?>
-				<?}?>
+				
 			</select>
-			<div class="invalid-feedback" <?=isset($error_transportType)&&$error_transportType!=''?'style="display:block;"':''?>><?=$error_transportType ?></div>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="fromInput" class="required">Откуда</label>
-			<input class="form-control<?=isset($error_from)&&$error_from!=''?' is-invalid':''?>" type="text" name="from" id="fromInput" autocomplete="off" value="<?=isset($_POST["from"])? $_POST["from"]:$row['from']?>">
-			<div class="invalid-feedback" <?=isset($error_from)&&$error_from!=''?'style="display:block;"':''?>><?=$error_from ?></div>
+			<input class="form-control" type="text" name="from" id="fromInput" autocomplete="off" value="">
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="toInput" class="required">Куда</label>
-			<input class="form-control<?=isset($error_to)&&$error_to!=''?' is-invalid':''?>" type="text" name="to" id="toInput" autocomplete="off" value="<?=isset($_POST["to"])? $_POST["to"]:$row['to']?>">
-			<div class="invalid-feedback" <?=isset($error_to)&&$error_to!=''?'style="display:block;"':''?>><?=$error_to ?></div>
+			<input class="form-control" type="text" name="to" id="toInput" autocomplete="off" value="">
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="routeInput" class="required">Маршрут следования</label>
-			<textarea class="form-control<?=isset($error_route)&&$error_route!=''?' is-invalid':''?>" name="route" id="routeInput" ><?=isset($_POST["route"])? $_POST["route"]:$row[route]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_route)&&$error_route!=''?'style="display:block;"':''?>><?=$error_route ?></div>
+			<textarea class="form-control" name="route" id="routeInput"></textarea>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="pogranInput" class="required">Погран - Переходы</label>
-			<textarea class="form-control<?=isset($error_pogran)&&$error_pogran!=''?' is-invalid':''?>" name="pogran" id="pogranInput" ><?=isset($_POST["pogran"])? $_POST["pogran"]:$row[pogran]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_pogran)&&$error_pogran!=''?'style="display:block;"':''?>><?=$error_pogran ?></div>
-		</div>
+            <textarea class="form-control" name="pogran" id="pogranInput"></textarea>
+        </div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="brokerInput" class="required">Декларант (Broker)</label>
-			<textarea class="form-control<?=isset($error_broker)&&$error_broker!=''?' is-invalid':''?>" name="broker" id="brokerInput" ><?=isset($_POST["broker"])? $_POST["broker"]:$row[broker]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_broker)&&$error_broker!=''?'style="display:block;"':''?>><?=$error_broker ?></div>
+			<textarea class="form-control" name="broker" id="brokerInput" ></textarea>
 		</div>		
 		<div class="form-group col-md-4 mr-4">
 			<label for="address1Input" class="required">Адрес загрузки</label>
-			<textarea class="form-control<?=isset($error_address1)&&$error_address1!=''?' is-invalid':''?>" name="address1" id="address1Input" ><?=isset($_POST["address1"])? $_POST["address1"]:$row[address1]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_address1)&&$error_address1!=''?'style="display:block;"':''?>><?=$error_address1 ?></div>
+			<textarea class="form-control" name="address1" id="address1Input" ></textarea>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="address2Input" class="required">Адрес разгрузки</label>
-			<textarea class="form-control<?=isset($error_address2)&&$error_address2!=''?' is-invalid':''?>" name="address2" id="address2Input" ><?=isset($_POST["address2"])? $_POST["address2"]:$row[address2]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_address2)&&$error_address2!=''?'style="display:block;"':''?>><?=$error_address2 ?></div>
+			<textarea class="form-control" name="address2" id="address2Input" ></textarea>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="contactName1Input">Контактное лицо на загрузке</label>
-			<textarea class="form-control<?=isset($error_contactName1)&&$error_contactName1!=''?' is-invalid':''?>" name="contactName1" id="contactName1Input" ><?=isset($_POST["contactName1"])? $_POST["contactName1"]:$row[contactName1]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_contactName1)&&$error_contactName1!=''?'style="display:block;"':''?>><?=$error_contactName1 ?></div>
+			<textarea class="form-control" name="contactName1" id="contactName1Input" ></textarea>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="contactName2Input" class="required">Контактное лицо в РМ</label>
-			<textarea class="form-control<?=isset($error_contactName2)&&$error_contactName2!=''?' is-invalid':''?>" name="contactName2" id="contactName2Input" ><?=isset($_POST["contactName2"])? $_POST["contactName2"]:$row[contactName2]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_contactName2)&&$error_contactName2!=''?'style="display:block;"':''?>><?=$error_contactName2 ?></div>
+			<textarea class="form-control" name="contactName2" id="contactName2Input" ></textarea>
 		</div>		
 
 		<div class="form-group col-md-4 mr-4">
 			<label for="customs1Input" class="required">Таможня импорта</label>
-			<textarea class="form-control<?=isset($error_customs1)&&$error_customs1!=''?' is-invalid':''?>" name="customs1" id="customs1Input" ><?=isset($_POST["customs1"])? $_POST["customs1"]:$row[customs1]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_customs1)&&$error_customs1!=''?'style="display:block;"':''?>><?=$error_customs1 ?></div>
+			<textarea class="form-control" name="customs1" id="customs1Input" ></textarea>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="customs2Input" class="required">Таможня экспорта</label>
-			<textarea class="form-control<?=isset($error_customs2)&&$error_customs2!=''?' is-invalid':''?>" name="customs2" id="customs2Input" ><?=isset($_POST["customs2"])? $_POST["customs2"]:$row[customs2]?></textarea>
-			<div class="invalid-feedback" <?=isset($error_customs2)&&$error_customs2!=''?'style="display:block;"':''?>><?=$error_customs2 ?></div>
+			<textarea class="form-control" name="customs2" id="customs2Input" ></textarea>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="temperatureInput" class="required">Температурный режим</label>
-				<input class="form-control<?=isset($error_temperature)&&$error_temperature!=''?' is-invalid':''?>" type="text" name="temperature" id="temperatureInput" autocomplete="off" value="<?=isset($_POST["temperature"])? $_POST["temperature"]:$row[temperature]?>">
-			<div class="invalid-feedback" <?=isset($error_temperature)&&$error_temperature!=''?'style="display:block;"':''?>><?=$error_temperature ?></div>
+				<input class="form-control" type="text" name="temperature" id="temperatureInput" autocomplete="off" value="">
 		</div>		
 		<div class="form-group col-md-4 mr-4">
 			<label for="customerPriceInput" class="required">Заказчик сумма</label>
-			<input class="form-control<?=isset($error_customerPrice)&&$error_customerPrice!=''?' is-invalid':''?>" type="text" name="customerPrice" id="customerPriceInput" autocomplete="off" value="<?=isset($_POST["customerPrice"])? $_POST["customerPrice"]:$row[customerPrice]?>" >
-			<div class="invalid-feedback" <?=isset($error_customerPrice)&&$error_customerPrice!=''?'style="display:block;"':''?>><?=$error_customerPrice ?></div>
+			<input class="form-control" type="text" name="customerPrice" id="customerPriceInput" autocomplete="off" value="" >
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="carrierPriceInput" class="required">Перевозчик сумма</label>
-			<input class="form-control<?=isset($error_carrierPrice)&&$error_carrierPrice!=''?' is-invalid':''?>" type="text" name="carrierPrice" id="carrierPriceInput" autocomplete="off" value="<?=isset($_POST["carrierPrice"])? $_POST["carrierPrice"]:$row[carrierPrice]?>" >
-			<div class="invalid-feedback" <?=isset($error_carrierPrice)&&$error_carrierPrice!=''?'style="display:block;"':''?>><?=$error_carrierPrice ?></div>
+			<input class="form-control" type="text" name="carrierPrice" id="carrierPriceInput" autocomplete="off" value="" >
 		</div>
-		<div class="form-group col-md-4 mr-4" style="display: none;">
+		<!-- <div class="form-group col-md-4 mr-4" style="display: none;">
 			<label for="sumForCustomerInput" class="required">Заказчик сумма(прописью)</label>
-			<input class="form-control<?=isset($error_sumForCustomer)&&$error_sumForCustomer!=''?' is-invalid':''?>" type="text" name="sumForCustomer" id="sumForCustomerInput" autocomplete="off" value="<?=isset($_POST["sumForCustomer"])? $_POST["sumForCustomer"]:$row[sumForCustomer]?>">
-			<div class="invalid-feedback" <?=isset($error_sumForCustomer)&&$error_sumForCustomer!=''?'style="display:block;"':''?>><?=$error_sumForCustomer ?></div>
+			<input class="form-control" type="text" name="sumForCustomer" id="sumForCustomerInput" autocomplete="off" value="">
 		</div>
 		<div class="form-group col-md-4 mr-4" style="display: none;">
 			<label for="sumForCarrierInput" class="required">Перевозчик сумма(прописью)</label>
-			<input class="form-control<?=isset($error_sumForCarrier)&&$error_sumForCarrier!=''?' is-invalid':''?>" type="text" name="sumForCarrier" id="sumForCarrierInput" autocomplete="off" value="<?=isset($_POST["sumForCarrier"])? $_POST["sumForCarrier"]:$row[sumForCarrier]?>">
-			<div class="invalid-feedback" <?=isset($error_sumForCarrier)&&$error_sumForCarrier!=''?'style="display:block;"':''?>><?=$error_sumForCarrier ?></div>
-		</div>
+			<input class="form-control" type="text" name="sumForCarrier" id="sumForCarrierInput" autocomplete="off" value="">
+		</div> -->
 				<div class="form-group col-md-4 mr-4">
 			<label for="pay_variant" class="required">Вариант оплаты</label>
-			<select class="form-control" name="pay_variant" id="pay_variant">
-                        <? if($row["pay_variant"] == "") { ?>
-                            <option selected="selected"></option>
-                        <?}
-                        else { ?>
-                            <option selected="selected"> <?=$row[pay_variant] ?> </option>
-                        <?}?>
-                        <? for($i = 0; $i < count($arrayOfpay_variant); $i++) {
-                            if($row["pay_variant"] != $arrayOfpay_variant[$i]) { ?>
+			<select class="form-control" name="payMetod" id="pay_variant">
+           <option selected="selected" name="payMetod" id="pay_variant" value=""> Selectați varianta de plată </option>
+            <? for($i = 0; $i < count($arrayOfpay_variant); $i++) {
+                            ?>
                                 <option><?=$arrayOfpay_variant[$i] ?></option>
                             <?}?>
-                        <?}?>
-                    </select>
+                         
+                            </select>
 		</div>
 
 		<div class="form-group col-md-4 mr-4">
-			<label for="languages">Язык документов</label>
-		
-			<select class="form-control" name="languages" id="languages">
-                        <? if($row["languages"] == "") { ?>
-                            <option selected="selected"></option>
-                        <?}
-                        else { ?>
-                            <option selected="selected"> <?=$row[languages] ?> </option>
-                        <?}?>
+			<label for="languages" class="required">Язык документов</label>
+                <select class="form-control" name="languages" id="languages" >
+                    <option selected="selected" name="languages" id="languages" value=""> Selectează limba </option>
                         <? for($i = 0; $i < count($arrayOflanguages); $i++) {
-                            if($row["avans_summ"] != $arrayOflanguages[$i]) { ?>
-                                <option><?=$arrayOflanguages[$i] ?></option>
-                            <?}?>
+                        if($row["avans_summ"] != $arrayOflanguages[$i]) { ?>
+                        <option><?=$arrayOflanguages[$i] ?></option>
                         <?}?>
-                    </select>
+                    <?}?>
+                </select>
 		</div>		
 			<div class="form-group col-md-4 mr-4" <? if($_SESSION["role"] != 1) {?>style="display: none;"<?php } ?>>
 				<label for="idUserInput" class="required">Выберите сотрудника</label>
-				<select class="form-control<?=isset($error_idUser)&&$error_idUser!=''?' is-invalid':''?>" name="idUser" id="idUserInput">
-					 <? if($_SESSION["role"] != 1) {?><option value="<?php echo $_SESSION["id"]; ?>" selected="selected"><?php echo $_SESSION["login"]; ?></option><?php } else { ?><option selected="selected"></option><?php } ?>
+				<select class="form-control" name="idUser" id="idUserInput">
+					 <? if($_SESSION["role"] != 1) {?><option name="idUserInput" id="idUserInput" value="<?php echo $_SESSION["id"]; ?>" selected="selected"><?php echo $_SESSION["login"]; ?></option><?php } else { ?><option selected="selected"></option><?php } ?>
 					<? while (($row2 = $result_set2->fetch_assoc()) != false) { ?>
 						<?  if($row2[id] == $idUser) {?>
 								<option selected="selected" value="<?=$row2[id]?>"><?=$row2[name]?></option>
@@ -244,11 +193,10 @@
 						<?}?>
 					<?}?>
 				</select>
-				<div class="invalid-feedback" <?=isset($error_idUser)&&$error_idUser!=''?'style="display:block;"':''?>><?=$error_idUser ?></div>
 			</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="currencyInput" class="required">Валюта</label>
-			<select class="form-control<?=isset($error_currency)&&$error_currency!=''?' is-invalid':''?>" name="currency" id="currencyInput">
+			<select class="form-control" name="currency" id="currencyInput">
 				<option selected="selected"></option>
 				<? for($i = 0; $i < count($arrayOfCurrency); $i++) {
 					if($currency == $arrayOfCurrency[$i]) { ?>
@@ -259,12 +207,10 @@
 					<?}?>
 				<?}?>
 			</select>
-			<div class="invalid-feedback" <?=isset($error_currency)&&$error_currency!=''?'style="display:block;"':''?>><?=$error_currency ?></div>
 		</div>
 		<div class="form-group col-md-4 mr-4">
 			<label for="cargoInput" class="required">Груз</label>
-			<input class="form-control<?=isset($error_cargo)&&$error_cargo!=''?' is-invalid':''?>" type="text" name="cargo" id="cargoInput" autocomplete="off" value="<?=isset($_POST["cargo"])? $_POST["cargo"]:$row[cargo]?>">
-			<div class="invalid-feedback" <?=isset($error_cargo)&&$error_cargo!=''?'style="display:block;"':''?>><?=$error_cargo ?></div>
+			<input class="form-control" type="text" name="cargo" id="cargoInput" autocomplete="off" value="<?=isset($_POST["cargo"])? $_POST["cargo"]:$row[cargo]?>">
 		</div>		
 		<div class="form-group col-md-4 mr-4">
 			<? if($isCurrencyPayment == 1) {?>
@@ -286,13 +232,13 @@
                         <?}?>
                     </select> 
 		</div>
-
-			<div class="form-group col-md-4 mr-4">
-				<label for="idUserInput" class="required">Ответственный за груз</label>
-					<select class="form-control<?=isset($error_idUser)&&$error_idUser!=''?' is-invalid':''?>" name="partener" id="partener">
-					<?php if ($row[partener] != '') {?> <option value="<?php echo $row[partener]; ?>" selected="selected"><?php echo $row5[name]; ?></option>
+        
+        <div class="form-group col-md-4 mr-4" <? if($_SESSION["role"] != 1) {?>style="display: none;"<?php } ?>>
+				<label for="idUserInput2" class="required">Выберите сотрудника</label>
+				<select class="form-control" name="idUser2" id="idUserInput2">
+                <?php if ($row[partener] != '') {?> <option value="<?php echo $row[partener]; ?>" selected="selected"><?php echo $row5[name]; ?></option>
 						<?php } else { ?>
-							<option value="<?php echo $_SESSION["id"]; ?>" selected="selected"></option>
+							<option selected="selected" value="">Выберите сотрудника</option>
 					<?php } ?>
 
 					<? while (($row3 = $result_set3->fetch_assoc()) != false) { ?>
@@ -301,12 +247,11 @@
 						<?php } ?>
 					<?}?>
 				</select>
-				<div class="invalid-feedback" <?=isset($error_partener)&&$error_partener!=''?'style="display:block;"':''?>><?=$error_partener ?></div>
 			</div>
- 
+
  				<div class="form-group col-md-4 mr-4">
 				<label for="CustomsInput" class="required">Таможня</label>
-					<select class="form-control" name="customs" id="customs">
+					<select class="form-control" name="customs" id="CustomsInput">
 					<?php if ($row[customs] != '') {?> <option value="<?php echo $row[customs]; ?>" selected="selected">
 
 						<?php if($row[customs]=='import'){echo 'Импорта';} elseif($row[customs]=='export') {echo 'Экспорта';} ?></option>
@@ -317,72 +262,468 @@
 							<option value="import">Импорта</option> 
 							<option value="export">Экспорта</option> 
 				</select>
-				<div class="invalid-feedback" <?=isset($error_customs)&&$error_customs!=''?'style="display:block;"':''?>><?=$error_customs ?></div>
 			</div>
 		
 	</div>  
+	<!-- Butonul de validare -->
+<button id="validateButton" type="button">Сохранить</button>
+<div id="errorMessages"></div>
+<style>
 
-	<?php if ($activePage == 'addRequest') { ?>
-<input class="btn btn-secondary btn-sm" id="add" type="submit" name="add" onclick="addRequest()" value="Сохранить"> 
-<?php } else if ($activePage == 'editRequest') { ?>
-<input class="btn btn-secondary btn-sm" id="add" type="submit" name="add" onclick="editRequest()" value="Сохранить"> 
-<?php }  else if ($activePage == 'duplicateRequest') { ?>
-<input class="btn btn-secondary btn-sm" id="add" type="submit" name="add" onclick="addRequest()" value="Сохранить"> 
-<?php } ?>
-
+</style>
 </form>
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function() {
+        // Declara o variabilă pentru a urmări dacă 'tag' este în blacklist
+        var tagInBlacklist = false;
+        // Declara o variabilă pentru a urmări dacă 'tag1' este în blacklist
+        var tag1InBlacklist = false;
 
+        $('#tag').change(function() {
+            var name = $(this).val();
 
-  <script>
+            // Resetăm mesajul de eroare pentru #tag
+            $('#tag').removeClass('is-invalid');
+            $('.invalid-feedback2').html('');
 
+            // Trimite cererea AJAX pentru verificare în blacklist
+            $.ajax({
+                type: 'POST',
+                url: 'check_blacklist.php',
+                data: { name: name },
+                success: function(response) {
+                    if (response === 'in_blacklist') {
+                        tagInBlacklist = true;
+                        $('#tag').addClass('is-invalid');
+                        $('.invalid-feedback2').html('<span style="color: red;">Имя в черном списке. Внесение в базу данных не допускается..</span>');
+                    } else {
+                        tagInBlacklist = false;
+                    }
 
-
-function addRequest(){
-	 $.ajax({
-		type: "POST", 
-		url: "addRequest_ajax.php",
-		data: $('#contactForm').serialize(),
-		 beforeSend: function () {
-                $('#add').attr("disabled","disabled");
-                $('.modal-body').css('opacity', '.5');
-            },
-            success:function(msg){
-
-                if(msg == 'err'){
-                	$('.statusMsg').html('<span style="color:red; text-align:center;">Вы не заполнили все поля!</span>');
-                } else {
-                   $('.statusMsg').html('<span style="color:green; text-align:center;">Ваша заявка принята! Спасибо что Вы с нами)</p>');
-                   $('#contactForm')[0].reset();
+                    // Verificăm ambele condiții pentru a dezactiva butonul
+                    if (tagInBlacklist || tag1InBlacklist) {
+                        $('#validateButton').prop('disabled', true);
+                    } else {
+                        $('#validateButton').prop('disabled', false);
+                    }
+                },
+                error: function() {
+                    $('#tag').addClass('is-invalid');
+                    $('.invalid-feedback2').html('A apărut o eroare în timpul verificării.');
                 }
+            });
+        });
 
-                $('#add').removeAttr("disabled");
-                $('.modal-body').css('opacity', '');
-            }
-	}); 
-	}
+        $('#tag1').change(function() {
+            var name = $(this).val();
 
-	function editRequest(){
-	 $.ajax({
-		type: "POST",
-		url: "editRequest_ajax.php", 
-		data: $('#contactForm').serialize(),
-		 beforeSend: function () {
-                $('#add').attr("disabled","disabled");
-                $('.modal-body').css('opacity', '.5');
-            },
-            success:function(msg){
-                if(msg == 'err'){
-                	$('.statusMsg').html('<span style="color:red; text-align:center;">Ошибка</span>');
-                } else {
-                   $('.statusMsg').html('<span style="color:green; text-align:center;">Данные заявки сохранены!</p>');
+            // Resetăm mesajul de eroare pentru #tag1
+            $('#tag1').removeClass('is-invalid');
+            $('.invalid-feedback3').html('');
+
+            // Trimite cererea AJAX pentru verificare în blacklist pentru 'tag1'
+            $.ajax({
+                type: 'POST',
+                url: 'check_blacklist1.php',
+                data: { name: name },
+                success: function(response) {
+                    if (response === 'in_blacklist') {
+                        tag1InBlacklist = true;
+                        $('#tag1').addClass('is-invalid');
+                        $('.invalid-feedback3').html('<span style="color: red;">Имя в черном списке. Внесение в базу данных не допускается..</span>');
+                    } else {
+                        tag1InBlacklist = false;
+                    }
+
+                    // Verificăm ambele condiții pentru a dezactiva butonul
+                    if (tagInBlacklist || tag1InBlacklist) {
+                        $('#validateButton').prop('disabled', true);
+                    } else {
+                        $('#validateButton').prop('disabled', false);
+                    }
+                },
+                error: function() {
+                    $('#tag1').addClass('is-invalid');
+                    $('.invalid-feedback3').html('A apărut o eroare în timpul verificării pentru "tag1".');
                 }
-                $('#add').removeAttr("disabled");
-                $('.modal-body').css('opacity', '');
-            }
-	}); 
-	}
+            });
+        });
+    });
+})(jQuery);
+</script>
+
+
+
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function() {
+        $('#validateButton').click(function() {
+            var isValid = true;
+            var errorMessages = [];
+
+        // Validarea fiecărui câmp individual
+        if ($('#dateInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați data.');
+            $('#dateInput').addClass('is-invalid');
+        } else {
+            $('#dateInput').removeClass('is-invalid');
+        }
+
+        if ($('#dateInput2').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați data de până.');
+            $('#dateInput2').addClass('is-invalid');
+        } else {
+            $('#dateInput2').removeClass('is-invalid');
+        }
+		if ($('#timeInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați ora.');
+            $('#timeInput').addClass('is-invalid');
+        } else {
+            $('#timeInput').removeClass('is-invalid');
+        }
+        
+        if ($('#termInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați termenul de livrare.');
+            $('#termInput').addClass('is-invalid');
+        } else {
+            $('#termInput').removeClass('is-invalid');
+        }
+
+        if ($('#tag').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați un client.');
+            $('#tag').addClass('is-invalid');
+        } else {
+            $('#tag').removeClass('is-invalid');
+        }
+
+        if ($('#tag1').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați un transportator.');
+            $('#tag1').addClass('is-invalid');
+        } else {
+            $('#tag1').removeClass('is-invalid');
+        }
+
+        if ($('#carNumberInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați numărul mașinii.');
+            $('#carNumberInput').addClass('is-invalid');
+        } else {
+            $('#carNumberInput').removeClass('is-invalid');
+        }
+
+		if ($('#fioInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați numele șoferului.');
+            $('#fioInput').addClass('is-invalid');
+        } else {
+            $('#fioInput').removeClass('is-invalid');
+        }
+
+        if ($('#driverPhonesInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați datele de contact a șoferului.');
+            $('#driverPhonesInput').addClass('is-invalid');
+        } else {
+            $('#driverPhonesInput').removeClass('is-invalid');
+        }
+		
+        if ($('#weightInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați cantitatea.');
+            $('#weightInput').addClass('is-invalid');
+        } else {
+            $('#weightInput').removeClass('is-invalid');
+        }
+
+        
+		if ($('#weight_var').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați cantitatea.');
+            $('#weight_var').addClass('is-invalid');
+        } else {
+            $('#weight_var').removeClass('is-invalid');
+        }
+
+        	if ($('#vInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați volumul.');
+            $('#vInput').addClass('is-invalid');
+        } else {
+            $('#vInput').removeClass('is-invalid');
+        }
+
+        if ($('#vInput_var').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați tipul volumului.');
+            $('#vInput_var').addClass('is-invalid');
+        } else {
+            $('#vInput_var').removeClass('is-invalid');
+        }
+
+		if ($('#categoryInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați tipul transportului.');
+            $('#categoryInput').addClass('is-invalid');
+        } else {
+            $('#categoryInput').removeClass('is-invalid');
+        }
+
+		if ($('#fromInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați de unde.');
+            $('#fromInput').addClass('is-invalid');
+        } else {
+            $('#fromInput').removeClass('is-invalid');
+        }
+		
+		if ($('#toInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați unde.');
+            $('#toInput').addClass('is-invalid');
+        } else {
+            $('#toInput').removeClass('is-invalid');
+        }
+		
+		if ($('#routeInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați itinerariul.');
+            $('#routeInput').addClass('is-invalid');
+        } else {
+            $('#routeInput').removeClass('is-invalid');
+        }
+
+		if ($('#pogranInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați Frontieră - Treceri.');
+            $('#pogranInput').addClass('is-invalid');
+        } else {
+            $('#pogranInput').removeClass('is-invalid');
+        }
 	
-var mapNumbers = {
+		if ($('#brokerInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați declarant (Broker).');
+            $('#brokerInput').addClass('is-invalid');
+        } else {
+            $('#brokerInput').removeClass('is-invalid');
+        }
+		
+		if ($('#address1Input').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați adresa de încărcare.');
+            $('#address1Input').addClass('is-invalid');
+        } else {
+            $('#address1Input').removeClass('is-invalid');
+        }
+
+		if ($('#address2Input').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați adresa de descărcare.');
+            $('#address2Input').addClass('is-invalid');
+        } else {
+            $('#address2Input').removeClass('is-invalid');
+        }
+
+		if ($('#contactName1Input').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați persoana de contact pentru descărcare.');
+            $('#contactName1Input').addClass('is-invalid');
+        } else {
+            $('#contactName1Input').removeClass('is-invalid');
+        }
+
+		if ($('#contactName2Input').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați persoana de contact în Republica Moldova.');
+            $('#contactName2Input').addClass('is-invalid');
+        } else {
+            $('#contactName2Input').removeClass('is-invalid');
+        }
+
+		if ($('#customs1Input').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați vama de import.');
+            $('#customs1Input').addClass('is-invalid');
+        } else {
+            $('#customs1Input').removeClass('is-invalid');
+        }
+
+		if ($('#customs2Input').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați vama de export.');
+            $('#customs2Input').addClass('is-invalid');
+        } else {
+            $('#customs2Input').removeClass('is-invalid');
+        }
+		
+		if ($('#temperatureInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați regimul de temperatură.');
+            $('#temperatureInput').addClass('is-invalid');
+        } else {
+            $('#temperatureInput').removeClass('is-invalid');
+        }
+
+		if ($('#customerPriceInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați suma clientului.');
+            $('#customerPriceInput').addClass('is-invalid');
+        } else {
+            $('#customerPriceInput').removeClass('is-invalid');
+        }
+		
+
+		if ($('#carrierPriceInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați suma transportatorului.');
+            $('#carrierPriceInput').addClass('is-invalid');
+        } else {
+            $('#carrierPriceInput').removeClass('is-invalid');
+        }
+		
+		
+		if ($('#pay_variant').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați tipul de plata.');
+            $('#pay_variant').addClass('is-invalid');
+        } else {
+            $('#pay_variant').removeClass('is-invalid');
+        }
+
+		if ($('#languages').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați limbajul documentului.');
+            $('#languages').addClass('is-invalid');
+        } else {
+            $('#languages').removeClass('is-invalid');
+        }
+		
+		if ($('#idUserInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați alegeți un angajat.');
+            $('#idUserInput').addClass('is-invalid');
+        } else {
+            $('#idUserInput').removeClass('is-invalid');
+        }
+
+		if ($('#currencyInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați moneda.');
+            $('#currencyInput').addClass('is-invalid');
+        } else {
+            $('#currencyInput').removeClass('is-invalid');
+        }
+
+		if ($('#cargoInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să completați ce marfă.');
+            $('#cargoInput').addClass('is-invalid');
+        } else {
+            $('#cargoInput').removeClass('is-invalid');
+        }
+
+		if ($('#comision_static').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați comision.');
+            $('#comision_static').addClass('is-invalid');
+        } else {
+            $('#comision_static').removeClass('is-invalid');
+        }
+		
+        if ($('#idUserInput2').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați persoana responsabilă.');
+            $('#idUserInput2').addClass('is-invalid');
+        } else {
+            $('#idUserInput2').removeClass('is-invalid');
+        }
+
+        if ($('#CustomsInput').val() === '') {
+            isValid = false;
+            errorMessages.push('Vă rugăm să selectați tipul transportării.');
+            $('#CustomsInput').addClass('is-invalid');
+        } else {
+            $('#CustomsInput').removeClass('is-invalid');
+        }
+        
+
+        if (!isValid) {
+            var errorMessageHTML = '<ul>';
+            for (var i = 0; i < errorMessages.length; i++) {
+                errorMessageHTML += '<li>' + errorMessages[i] + '</li>';
+            }
+            errorMessageHTML += '</ul>';
+            $('#errorMessages').html(errorMessageHTML);
+            $('#errorMessages').show();
+        } else {
+            $('#errorMessages').hide();
+
+            // Trimite formularul prin Ajax
+            $.ajax({
+                type: 'POST',
+                url: 'addRequest_ajax.php',
+                data: {
+                    // Aici puteți adăuga câmpurile și valorile corespunzătoare din formular
+                    dateInput: $('#dateInput').val(),
+                    dateInput2: $('#dateInput2').val(),
+                    timeInput: $('#timeInput').val(),
+                    termInput: $('#termInput').val(),
+                    tag: $('#tag').val(),
+                    tag1: $('#tag1').val(),
+                    carNumberInput: $('#carNumberInput').val(),
+                    fioInput: $('#fioInput').val(),
+                    driverPhonesInput: $('#driverPhonesInput').val(),
+                    weightInput: $('#weightInput').val(),
+                    weight_var: $('#weight_var').val(),
+                    vInput: $('#vInput').val(),
+                    vInput_var : $('#vInput_var').val(),
+                    categoryInput: $('#categoryInput').val(),
+                    fromInput: $('#fromInput').val(),
+					toInput: $('#toInput').val(),
+					routeInput: $('#routeInput').val(),
+					pogranInput: $('#pogranInput').val(),
+					brokerInput: $('#brokerInput').val(),
+					address1Input : $('#address1Input').val(),
+					address2Input : $('#address2Input').val(),
+					contactName1Input : $('#contactName1Input').val(),
+					contactName2Input : $('#contactName2Input').val(),
+					customs1Input : $('#customs1Input').val(),
+					customs2Input : $('#customs2Input').val(),
+					temperatureInput : $('#temperatureInput').val(),
+					customerPriceInput : $('#customerPriceInput').val(),
+                    carrierPriceInput : $('#carrierPriceInput').val(),
+					pay_variant : $('#pay_variant').val(),
+                    languages : $('#languages').val(),
+                    idUserInput : $('#idUserInput').val(),
+					currencyInput : $('#currencyInput').val(),
+					cargoInput : $('#cargoInput').val(),
+					comision_static : $('#comision_static').val(),
+                    idUserInput2 : $('#idUserInput2').val(),
+                    CustomsInput : $('#CustomsInput').val()
+					
+                },
+                success: function(response) {
+                    // Aici puteți gestiona răspunsul primit de la server după trimitere
+                    alert(response);
+                },
+                error: function() {
+                    // Adăugăm clasa 'is-invalid' pentru a evidenția mesajul de eroare în roșu
+                    $('#errorMessages').addClass('is-invalid');
+                    alert('A apărut o eroare în timpul trimiterii.');
+                }
+            });
+        }
+     });
+    });
+
+    var mapNumbers = {
     0 : [2, 1, "ноль"],
     1 : [0, 2, "один", "одна"],
     2 : [1, 2, "два", "две"],
@@ -530,6 +871,7 @@ $('#carrierPriceInput').on('change keyup input click', function(){
 	}
 });
  });
-
+})(jQuery);
 </script>
-<div class="statusMsg"></div>
+
+

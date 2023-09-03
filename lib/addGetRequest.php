@@ -239,16 +239,12 @@
 
                  <div class="form-group col-md-4 mr-4">
                     <label for="tag" class="required">Выберите заказчика</label>
-                    
                     <div class="invalid-feedback" <?=isset($error_customer)&&$error_customer!=''?'style="display:block;"':''?>><?=$error_customer ?></div>
-    
-            <input class="form-control<?=isset($error_customer)&&$error_customer!=''?' is-invalid':''?>" type="text" name="customer" id="tag" autocomplete="off" value="<?=$_POST["customer"]?>">
-            
-            <a class="btn btn-secondary btn-sm" id="checkBlacklistButton" type="submit" name="blacklist" value="valueToCheck">Проверка на черный список
-            </a>
-            <div id="messageContainer" style="display: none;" >
-            <p id="messageText"></p>
-</div>
+                    <input class="form-control<?=isset($error_customer)&&$error_customer!=''?' is-invalid':''?>" type="text" name="customer" id="tag" autocomplete="off" value="<?=$_POST["customer"]?>">
+                        <div id="messageContainer" style="display: none;" >
+                        <p id="messageText"></p>
+                            </div>
+                    <div class="invalid-feedback2"></div>
                 </div>
 
                 
@@ -295,43 +291,52 @@
                 </div>  
 
             </div>
-            <input class="btn btn-secondary btn-sm" type="submit" name="add" value="Добавить">
+            <input id="add" class="btn btn-secondary btn-sm" type="submit" name="add" value="Добавить">
             <input class="btn btn-danger btn-sm" type="submit" name="cancel" value="Отменить">
         </form>
     </div>
     
-    <script defer>
-            $(document).ready(function() {
-                $("#checkBlacklistButton").click(function() {
-                    var valueToCheck = $("#tag").val();
-                    
-                    $.ajax({
-                        url: "../lib/check_blacklist.php",
-                        type: "POST",
-                        data: { value: valueToCheck },
-                        cache: false,
-                        success: function(response) {
-                            var responseArray = response.split(':');
-                            var status = responseArray[0];
-                            var name = responseArray[1];
-                            var reason = responseArray[2];
 
-                            var messageContainer = $("#messageContainer ");
-                            var messageText = $("#messageText");
+    <script type="text/javascript">
+    $(document).ready(function() {
+        // Declara o variabilă pentru a urmări dacă 'tag' este în blacklist
+        var tagInBlacklist = false;
 
-                            if (status === "found") {
-                                messageText.text("Компания найдена в черном списке!" + '\n' + "Мотив: " + reason);
-                            } else {
-                                messageText.text("Все в порядке!");
-                            }
+        $('#tag').change(function() {
+            var name = $(this).val();
 
-                            messageContainer.show(); // Afișați containerul mesajului
-                        }
-                    });
-                });
+            // Resetăm mesajul de eroare pentru #tag
+            $('#tag').removeClass('is-invalid');
+            $('.invalid-feedback2').html('');
+
+            // Trimite cererea AJAX pentru verificare în blacklist
+            $.ajax({
+                type: 'POST',
+                url: 'check_blacklist0.php',
+                data: { name: name },
+                success: function(response) {
+                    if (response === 'in_blacklist') {
+                        tagInBlacklist = true;
+                        $('#tag').addClass('is-invalid');
+                        $('.invalid-feedback2').html('<span style="color: red;">Имя в черном списке. Внесение в базу данных не допускается..</span>');
+                    } else {
+                        tagInBlacklist = false;
+                    }
+
+                    // Dezactivează butonul dacă 'tag' este în blacklist
+                    $('#add').attr('disabled', tagInBlacklist);
+                },
+                error: function() {
+                    $('#tag').addClass('is-invalid');
+                    $('.invalid-feedback2').html('A apărut o eroare în timpul verificării.');
+                }
             });
+        });
+    });
+</script>
 
-
+    <script defer>
+        
         function autocompleteTag(){
             var ajax = new XMLHttpRequest();
             ajax.open("GET", "../lib/autocomplete.php", true);
@@ -341,6 +346,25 @@
             };
             ajax.send();
         }
+        function autocompleteTag5(){
+            var ajax = new XMLHttpRequest();
+            ajax.open("GET", "../lib/autocompleteBlackList.php", true);
+            ajax.onload = function () {
+                var list = JSON.parse(ajax.responseText);
+                new Awesomplete(document.querySelector("#tag"), {minChars: 3, list: list});
+            };
+            ajax.send();
+        }
+        function autocompleteTag(){
+            var ajax = new XMLHttpRequest();
+            ajax.open("GET", "../lib/autocomplete.php", true);
+            ajax.onload = function () {
+                var list = JSON.parse(ajax.responseText);
+                new Awesomplete(document.querySelector("#tag"), {minChars: 1, list: list});
+            };
+            ajax.send();
+        }
+        
         function autocompleteTag1(){
             var ajax = new XMLHttpRequest();
             ajax.open("GET", "../lib/autocomplete1.php", true);
@@ -407,6 +431,7 @@
         $(function(){
             autocompleteTag();
             autocompleteTag1();
+            autocompleteTag5();
             autocompletefromInput();
             autocompleteToInput();
             var postDate = $('#dateInput').val();

@@ -8,7 +8,7 @@
 		private static $user = null;
 		
 		private function __construct() {
-			$this->db = new mysqli("sql306.hostingem.ru", "gnioo_32733497", "545426", "gnioo_32733497_itecomd_crmtest"); 
+			$this->db = new mysqli("localhost", "root", "", "itecomd_crmtest"); 
 			$this->db->query("SET NAMES 'utf8'");
 		}
 		
@@ -236,9 +236,13 @@
 			$this->db->query("INSERT INTO `payments` (`contractorsType`, `customer`, `date`, `number`, `days`) VALUES ('$contractorsType', '$customer', '$date', '$number', '$days')");
 		}
 		
-		public function addToBlacklist($name, $contactName, $selectedStatus111) {
+		public function addToBlacklist($name, $contactName, $status) {
 			$timeNow = time();
-			$this->db->query ("INSERT INTO `blacklist` (`name`, `contactName`, `status111`, `date`) VALUES ('$name', '$contactName', '$selectedStatus111', '$timeNow')");
+			$this->db->query("INSERT INTO `blacklist` (`name`, `contactName`, `date`,`status` ) VALUES ('$name', '$contactName', '$timeNow', '$status')");
+		}
+		public function addToBlacklist1($name, $contactName, $status) {
+			$timeNow = time();
+			$this->db->query("INSERT INTO `blacklist1` (`name`, `contactName`, `date`,`status` ) VALUES ('$name', '$contactName', '$timeNow', '$status')");
 		}
 		
 		public function addDoc($id, $name, $category, $path) {
@@ -343,8 +347,8 @@
 			$this->db->query("UPDATE `contractors` SET `isMarked`='$isMarked' WHERE `id` = '$id'");
 		} 
 					 
-		public function editBlacklist($id, $name, $contactName, $selectedStatus111) {
-			$this->db->query("UPDATE `blacklist` SET `contactName`='$contactName', `status111`='$selectedStatus111', `name`='$name' WHERE `id` = '$id'");
+		public function editBlacklist($id, $name, $contactName, $reason) {
+			$this->db->query("UPDATE `blacklist` SET `contactName`='$contactName', `reason`='$reason', `name`='$name' WHERE `id` = '$id'");
 		}
 
 								
@@ -693,7 +697,16 @@
 			return $result_set;
         }
 
+		
+		public function AJAXSearchBlacklist($search) {
+			$result_set = $this->db->query("SELECT * FROM `blacklist` WHERE `name` LIKE '%$search%' ORDER by date DESC");
+			return $result_set;
+        }
 
+		public function AJAXSearchBlacklist1($search) {
+			$result_set = $this->db->query("SELECT * FROM `blacklist1` WHERE `name` LIKE '%$search%' ORDER by date DESC");
+			return $result_set;
+        }
 
 			
         public function searchClients($idManager, $search) {
